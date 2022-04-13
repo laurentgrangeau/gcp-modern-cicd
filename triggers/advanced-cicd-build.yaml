@@ -1,7 +1,7 @@
-createTime: '2022-04-12T22:39:58.287616177Z'
-filename: build/01-simple-cloudbuild.yaml
-id: f2e6e9f2-cdb3-44bd-9de0-f11d9fb20cda
-name: simple-cicd-build
+createTime: '2022-04-06T12:31:25.455592839Z'
+filename: build/03-with-cloud-deploy.yaml
+id: 999d9c11-ee58-4fc9-af8f-69347b273377
+name: advanced-cicd-build
 substitutions:
   _ARTIFACT_REGISTRY_REPO: simple-cicd-demo
   _COMPUTE_CLUSTER: k8s
