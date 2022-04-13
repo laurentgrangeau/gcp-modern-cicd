@@ -1,0 +1,17 @@
+createTime: '2022-04-12T22:39:58.287616177Z'
+filename: build/01-simple-cloudbuild.yaml
+id: f2e6e9f2-cdb3-44bd-9de0-f11d9fb20cda
+name: simple-cicd-build
+substitutions:
+  _ARTIFACT_REGISTRY_REPO: simple-cicd-demo
+  _COMPUTE_CLUSTER: k8s
+  _COMPUTE_ZONE: europe-west1-b
+  _GCP_PROJECT: aflalo-cicd-demo
+  _GCP_REGION: europe-west1
+  _IMAGE_NAME: demo-app
+  _DEPLOY_PIPELINE: run-pipeline
+  _SEVERITY: critical
+triggerTemplate:
+  branchName: ^main$
+  projectId: aflalo-cicd-demo
+  repoName: aflalo-cicd-demo
