@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-app
+  annotations:
+    env: prod
+  namespace: prod
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      run: demo-app
+  template:
+    metadata:
+      labels:
+        run: demo-app
+    spec:
+      containers:
+      - name: digital-cashier
+        image: gke-container

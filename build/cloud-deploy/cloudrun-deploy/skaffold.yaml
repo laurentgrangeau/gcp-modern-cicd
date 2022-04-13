@@ -1,0 +1,18 @@
+apiVersion: skaffold/v2beta7
+kind: Config
+profiles:
+ - name: prod
+   deploy:
+     kubectl:
+       manifests:
+         - 1-run-prod-*.yaml
+ - name: dev
+   deploy:
+     kubectl:
+       manifests:
+         - 1-run-dev-*.yaml
+ - name: staging
+   deploy:
+     kubectl:
+       manifests:
+         - 1-run-staging-*.yaml
