@@ -31,23 +31,29 @@ storage.googleapis.com
 ## 4. Add IAM roles to Cloud Build SA
 
 ```sh
-gcloud projects add-iam-policy-binding PROJECT_ID \
-        --member="service-PROJECT_NUMBER@gcp-sa-cloudbuild.iam.gserviceaccount.com" \
+export PROJECT_ID=$(gcloud config list --format 'value(core.project)')
+export PROJECT_NUMBER=$(gcloud projects list \
+    --filter=${PROJECT_ID} --format="value(PROJECT_NUMBER)")
+```
+
+```sh
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+        --member="serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com" \
         --role="roles/clouddeploy.releaser"
 ```
 ```sh
-gcloud projects add-iam-policy-binding PROJECT_ID \
-        --member="service-PROJECT_NUMBER@gcp-sa-cloudbuild.iam.gserviceaccount.com" \
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+        --member="serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com" \
         --role="roles/container.developer"
 ```
 ```sh
-gcloud projects add-iam-policy-binding PROJECT_ID \
-        --member="service-PROJECT_NUMBER@gcp-sa-cloudbuild.iam.gserviceaccount.com" \
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+        --member="serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com" \
         --role="roles/ondemandscanning.admin"
 ```
 ```sh
-gcloud projects add-iam-policy-binding PROJECT_ID \
-        --member="service-PROJECT_NUMBER@gcp-sa-cloudbuild.iam.gserviceaccount.com" \
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+        --member="serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com" \
         --role="roles/run.admin"
 ```
 
