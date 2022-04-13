@@ -2,8 +2,8 @@ apiVersion: run.cnrm.cloud.google.com/v1beta1
 kind: RunService
 metadata:
   labels:
-    cloud-deploy-target: cashier-prod
-  name: cashier-prod
+    cloud-deploy-target: run-prod
+  name: demo-app-prod
   namespace: config-control
 spec:
   ingress: INGRESS_TRAFFIC_ALL
