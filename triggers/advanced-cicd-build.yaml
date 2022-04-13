@@ -1,17 +1,21 @@
-createTime: '2022-04-06T12:31:25.455592839Z'
-filename: build/03-with-cloud-deploy.yaml
-id: 999d9c11-ee58-4fc9-af8f-69347b273377
+createTime: '2022-04-13T13:22:49.092520433Z'
+gitFileSource:
+  path: build/03-with-cloud-deploy.yaml
+  repoType: CLOUD_SOURCE_REPOSITORIES
+  revision: refs/heads/main
+  uri: https://source.developers.google.com/p/aflalo-cicd-demo/r/aflalo-cicd-demo
+id: 7deb0ae6-1c14-4e44-b1e8-b87dd4ac7f6f
 name: advanced-cicd-build
+sourceToBuild:
+  ref: refs/heads/main
+  repoType: CLOUD_SOURCE_REPOSITORIES
+  uri: https://source.developers.google.com/p/aflalo-cicd-demo/r/aflalo-cicd-demo
 substitutions:
   _ARTIFACT_REGISTRY_REPO: simple-cicd-demo
   _COMPUTE_CLUSTER: k8s
   _COMPUTE_ZONE: europe-west1-b
+  _DEPLOY_PIPELINE: run-pipeline
   _GCP_PROJECT: aflalo-cicd-demo
   _GCP_REGION: europe-west1
   _IMAGE_NAME: demo-app
-  _DEPLOY_PIPELINE: run-pipeline
-  _SEVERITY: critical
-triggerTemplate:
-  branchName: ^main$
-  projectId: aflalo-cicd-demo
-  repoName: aflalo-cicd-demo
+  _SEVERITY: CRITICAL
