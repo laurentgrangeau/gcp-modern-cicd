@@ -13,16 +13,6 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push',  '${_GCP_REGION}-docker.pkg.dev/${_GCP_PROJECT}/${_ARTIFACT_REGISTRY_REPO}/${_IMAGE_NAME}:${SHORT_SHA}']
 
-# Push to Cloud Run
-- name: 'gcr.io/cloud-builders/gcloud'
-  args: 
-    [
-      'run', 'deploy', '${_IMAGE_NAME}',
-      '--image', '${_GCP_REGION}-docker.pkg.dev/${_GCP_PROJECT}/${_ARTIFACT_REGISTRY_REPO}/${_IMAGE_NAME}:${SHORT_SHA}',
-      '--region', '${_GCP_REGION}', '--platform', 'managed'
-    ]
-
-
 #Edit Image SHA for GKE
 #- name: 'gcr.io/cloud-builders/gcloud'
 #  entrypoint: 'sed'
@@ -46,3 +36,14 @@ steps:
 #    ]
 images:
   - ${_GCP_REGION}-docker.pkg.dev/${_GCP_PROJECT}/${_ARTIFACT_REGISTRY_REPO}/${_IMAGE_NAME}:${SHORT_SHA}
+
+steps:
+
+# Push to Cloud Run
+- name: 'gcr.io/cloud-builders/gcloud'
+  args: 
+    [
+      'run', 'deploy', '${_IMAGE_NAME}',
+      '--image', '${_GCP_REGION}-docker.pkg.dev/${_GCP_PROJECT}/${_ARTIFACT_REGISTRY_REPO}/${_IMAGE_NAME}:${SHORT_SHA}',
+      '--region', '${_GCP_REGION}', '--platform', 'managed'
+    ]
