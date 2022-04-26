@@ -45,4 +45,4 @@ steps:
 #      '--cluster', '${_COMPUTE_CLUSTER}'
 #    ]
 images:
-  - ${_GCP_REGION}-docker.pkg.dev/${PROJECT_ID}/${_ARTIFACT_REGISTRY_REPO}/${_IMAGE_NAME}:${SHORT_SHA}
+  - ${_GCP_REGION}-docker.pkg.dev/${_GCP_PROJECT}/${_ARTIFACT_REGISTRY_REPO}/${_IMAGE_NAME}:${SHORT_SHA}
