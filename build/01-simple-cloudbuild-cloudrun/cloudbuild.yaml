@@ -7,7 +7,7 @@ steps:
       [
         "build",
         "--builder=gcr.io/buildpacks/builder",
-        "${_GCP_REGION}-docker.pkg.dev/${_GCP_PROJECT}/${_ARTIFACT_REGISTRY_REPO}/${_IMAGE_NAME}:${SHORT_SHA}",
+        "${_GCP_REGION}-docker.pkg.dev/${_GCP_PROJECT}/${_ARTIFACT_REGISTRY_REPO}/${_IMAGE_NAME}:${SHORT_SHA}"
       ]
 
   # Pushing to artifact registry
@@ -15,7 +15,7 @@ steps:
     args:
       [
         "push",
-        "${_GCP_REGION}-docker.pkg.dev/${_GCP_PROJECT}/${_ARTIFACT_REGISTRY_REPO}/${_IMAGE_NAME}:${SHORT_SHA}",
+        "${_GCP_REGION}-docker.pkg.dev/${_GCP_PROJECT}/${_ARTIFACT_REGISTRY_REPO}/${_IMAGE_NAME}:${SHORT_SHA}"
       ]
 
   # Push to Cloud Run
@@ -31,6 +31,7 @@ steps:
         "${_GCP_REGION}",
         "--platform",
         "managed",
+        "--allow-unauthenticated"
       ]
 
 images:
