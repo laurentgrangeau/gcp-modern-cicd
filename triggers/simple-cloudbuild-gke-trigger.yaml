@@ -1,0 +1,16 @@
+createTime: '2022-06-23T13:39:43.551680727Z'
+filename: build/00-simple-cloudbuild-gke/cloudbuild.yaml
+github:
+  name: gcp-modern-cicd
+  owner: laurentgrangeau
+  push:
+    branch: ^main$
+id: 25d44df7-2e86-4eb7-9842-d05a55088cd5
+includeBuildLogs: INCLUDE_BUILD_LOGS_WITH_STATUS
+name: simple-cloudbuild-gke
+substitutions:
+  _ARTIFACT_REGISTRY_REPO: modern-cicd
+  _GCP_PROJECT: lgu-demos
+  _GCP_REGION: europe-west1
+  _IMAGE_NAME: demo-app
+  _K8S_CLUSTER: modern-cicd
