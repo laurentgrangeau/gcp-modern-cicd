@@ -20,4 +20,4 @@ spec:
         iam.gke.io/gke-metadata-server-enabled: "true"
       containers:
       - name: digital-cashier
-        image: europe-west1-docker.pkg.dev/PROJECT_ID/ARTIFACT_REGISTRY_REPO/IMAGE_NAME:SHORT_SHA
+        image: GCP_REGION-docker.pkg.dev/PROJECT_ID/ARTIFACT_REGISTRY_REPO/IMAGE_NAME:SHORT_SHA
