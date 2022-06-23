@@ -1,6 +1,7 @@
 steps:
   # Use Buildpacks to create a container image
-  - name: "gcr.io/k8s-skaffold/pack"
+  - id: Build the application
+    name: "gcr.io/k8s-skaffold/pack"
     dir: "app/"
     entrypoint: "pack"
     args:
@@ -11,7 +12,8 @@ steps:
       ]
 
   # Pushing to Artifact Registry
-  - name: "gcr.io/cloud-builders/docker"
+  - id: Push the containerized application
+    name: "gcr.io/cloud-builders/docker"
     args:
       [
         "push",
@@ -19,7 +21,8 @@ steps:
       ]
 
   # Edit Image SHA for GKE
-  - name: "gcr.io/cloud-builders/gcloud"
+  - id: Substitute variables
+    name: "gcr.io/cloud-builders/gcloud"
     entrypoint: "sed"
     args:
       [
@@ -38,7 +41,8 @@ steps:
       ]
 
   # Push to GKE
-  - name: "gcr.io/cloud-builders/gke-deploy"
+  - id: Push to GKE
+    name: "gcr.io/cloud-builders/gke-deploy"
     args:
       [
         "apply",

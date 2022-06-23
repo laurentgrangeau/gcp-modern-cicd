@@ -33,7 +33,7 @@ steps:
         --format="value(response.scan)" > /workspace/scan_id.txt
 
   # Analyze the result of the scan
-  - id: Severity check
+  - id: Check vulnerabilities severity
     name: "gcr.io/cloud-builders/gcloud"
     entrypoint: "bash"
     args:
@@ -44,7 +44,8 @@ steps:
         then echo "Failed vulnerability check for ${_SEVERITY} level" && exit 1; else echo "No ${_SEVERITY} vulnerability found, congrats !" && exit 0; fi
 
   # Push to Cloud Run
-  - name: "gcr.io/cloud-builders/gcloud"
+  - id: Push to Cloud Run
+    name: "gcr.io/cloud-builders/gcloud"
     args:
       [
         "run",
