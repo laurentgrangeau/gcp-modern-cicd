@@ -1,8 +1,8 @@
-# Simple CICD demo on GCP
+# Modern CICD on GCP
 
 ## 0. Activate APIs
 
-```sh
+```bash
 gcloud services enable artifactregistry.googleapis.com \
 binaryauthorization.googleapis.com \
 cloudbuild.googleapis.com \
@@ -29,34 +29,35 @@ storage.googleapis.com
 ## 3. Create a Cloud Build Trigger (see triggers folder for example)
 
 ## 4. Add IAM roles to Cloud Build SA
-
-```sh
+### Export some useful variables
+```bash
 export PROJECT_ID=$(gcloud config list --format 'value(core.project)')
 export PROJECT_NUMBER=$(gcloud projects list \
     --filter=${PROJECT_ID} --format="value(PROJECT_NUMBER)")
 ```
 
-```sh
-gcloud projects add-iam-policy-binding ${PROJECT_ID} \
-        --member="serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com" \
-        --role="roles/clouddeploy.releaser"
-```
-```sh
+### Grant Cloud Build access to GKE
+```bash
 gcloud projects add-iam-policy-binding ${PROJECT_ID} \
         --member="serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com" \
         --role="roles/container.developer"
 ```
-```sh
+```bash
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+        --member="serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com" \
+        --role="roles/clouddeploy.releaser"
+```
+```bash
 gcloud projects add-iam-policy-binding ${PROJECT_ID} \
         --member="serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com" \
         --role="roles/iam.serviceAccountUser"
 ```
-```sh
+```bash
 gcloud projects add-iam-policy-binding ${PROJECT_ID} \
         --member="serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com" \
         --role="roles/ondemandscanning.admin"
 ```
-```sh
+```bash
 gcloud projects add-iam-policy-binding ${PROJECT_ID} \
         --member="serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com" \
         --role="roles/run.admin"
