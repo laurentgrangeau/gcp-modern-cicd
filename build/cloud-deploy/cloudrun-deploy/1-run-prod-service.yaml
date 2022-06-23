@@ -8,9 +8,9 @@ metadata:
 spec:
   ingress: INGRESS_TRAFFIC_ALL
   location: europe-west1
-  projectRef: 
+  projectRef:
     external: projects/$PROJECT_ID
-  template:      
+  template:
     containers:
       - env:
           - name: environment

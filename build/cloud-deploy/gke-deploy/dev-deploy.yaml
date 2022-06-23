@@ -16,5 +16,5 @@ spec:
         run: demo-app
     spec:
       containers:
-      - name: demo-app
-        image: gke-container
+        - name: demo-app
+          image: gke-container

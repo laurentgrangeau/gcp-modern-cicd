@@ -1,4 +1,4 @@
-createTime: '2022-06-23T13:39:43.551680727Z'
+createTime: "2022-06-23T13:39:43.551680727Z"
 filename: build/00-simple-cloudbuild-gke/cloudbuild.yaml
 github:
   name: gcp-modern-cicd
