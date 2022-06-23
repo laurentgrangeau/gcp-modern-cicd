@@ -24,10 +24,15 @@ steps:
     args:
       [
         "-i",
+        "-e",
         "s/SHORT_SHA/${SHORT_SHA}/g",
+        "-e",
         "s/IMAGE_NAME/${_IMAGE_NAME}/g",
+        "-e",
         "s/PROJECT_ID/${_GCP_PROJECT}/g",
+        "-e",
         "s/ARTIFACT_REGISTRY_REPO/${_ARTIFACT_REGISTRY_REPO}/g",
+        "-e",
         "s/GCP_REGION/${_GCP_REGION}/g",
         "build/k8s/deployment.yaml",
       ]
