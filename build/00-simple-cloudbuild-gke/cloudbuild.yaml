@@ -7,7 +7,7 @@ steps:
       [
         "build",
         "--builder=gcr.io/buildpacks/builder",
-        "${_GCP_REGION}-docker.pkg.dev/${_GCP_PROJECT}/${_ARTIFACT_REGISTRY_REPO}/${_IMAGE_NAME}:${SHORT_SHA}",
+        "${_GCP_REGION}-docker.pkg.dev/${_GCP_PROJECT}/${_ARTIFACT_REGISTRY_REPO}/${_IMAGE_NAME}:${SHORT_SHA}"
       ]
 
   # Pushing to Artifact Registry
@@ -15,7 +15,7 @@ steps:
     args:
       [
         "push",
-        "${_GCP_REGION}-docker.pkg.dev/${_GCP_PROJECT}/${_ARTIFACT_REGISTRY_REPO}/${_IMAGE_NAME}:${SHORT_SHA}",
+        "${_GCP_REGION}-docker.pkg.dev/${_GCP_PROJECT}/${_ARTIFACT_REGISTRY_REPO}/${_IMAGE_NAME}:${SHORT_SHA}"
       ]
 
   # Edit Image SHA for GKE
@@ -34,7 +34,7 @@ steps:
         "s/ARTIFACT_REGISTRY_REPO/${_ARTIFACT_REGISTRY_REPO}/g",
         "-e",
         "s/GCP_REGION/${_GCP_REGION}/g",
-        "build/k8s/deployment.yaml",
+        "build/k8s/deployment.yaml"
       ]
 
   # Push to GKE
@@ -44,7 +44,7 @@ steps:
         "apply",
         "--filename=./build/k8s/deployment.yaml",
         "--location=${_GCP_REGION}",
-        "--cluster=${_K8S_CLUSTER}",
+        "--cluster=${_K8S_CLUSTER}"
       ]
 
 images:
