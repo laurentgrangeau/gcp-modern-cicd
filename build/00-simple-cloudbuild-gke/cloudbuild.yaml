@@ -42,12 +42,9 @@ steps:
     args:
       [
         "apply",
-        "--filename",
-        "./build/k8s/deployment.yaml",
-        "--location",
-        "${_GCP_REGION}",
-        "--cluster",
-        "${_COMPUTE_CLUSTER}",
+        "--filename=./build/k8s/deployment.yaml",
+        "--location=${_GCP_REGION}",
+        "--cluster=${_COMPUTE_CLUSTER}",
       ]
 
 images:
