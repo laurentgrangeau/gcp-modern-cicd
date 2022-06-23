@@ -9,7 +9,7 @@ spec:
   ingress: INGRESS_TRAFFIC_ALL
   location: europe-west1
   projectRef:
-    external: projects/$PROJECT_ID
+    external: projects/lgu-demos
   template:
     containers:
       - env:
