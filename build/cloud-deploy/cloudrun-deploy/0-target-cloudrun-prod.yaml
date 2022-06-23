@@ -6,4 +6,4 @@ metadata:
 description: Cloud Run production environment
 gke:
   # You need to substitute your project id here
-  cluster: projects/$PROJECT_ID/locations/us-central1/clusters/krmapihost-cc-deployrun
+  cluster: projects/lgu-demos/locations/europe-west1/clusters/krmapihost-cc-deployrun
