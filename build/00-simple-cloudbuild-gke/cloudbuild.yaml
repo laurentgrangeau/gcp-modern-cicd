@@ -1,38 +1,49 @@
 steps:
-# Use Buildpacks to create a container image
-- name: 'gcr.io/k8s-skaffold/pack'
-  dir: 'app/'
-  entrypoint: 'pack' 
-  args: 
-    [
-      'build', '--builder=gcr.io/buildpacks/builder', '${_GCP_REGION}-docker.pkg.dev/${_GCP_PROJECT}/${_ARTIFACT_REGISTRY_REPO}/${_IMAGE_NAME}:${SHORT_SHA}'
-    ]
+  # Use Buildpacks to create a container image
+  - name: "gcr.io/k8s-skaffold/pack"
+    dir: "app/"
+    entrypoint: "pack"
+    args:
+      [
+        "build",
+        "--builder=gcr.io/buildpacks/builder",
+        "${_GCP_REGION}-docker.pkg.dev/${_GCP_PROJECT}/${_ARTIFACT_REGISTRY_REPO}/${_IMAGE_NAME}:${SHORT_SHA}",
+      ]
 
-# Pushing to Artifact Registry
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['push',  '${_GCP_REGION}-docker.pkg.dev/${_GCP_PROJECT}/${_ARTIFACT_REGISTRY_REPO}/${_IMAGE_NAME}:${SHORT_SHA}']
+  # Pushing to Artifact Registry
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      [
+        "push",
+        "${_GCP_REGION}-docker.pkg.dev/${_GCP_PROJECT}/${_ARTIFACT_REGISTRY_REPO}/${_IMAGE_NAME}:${SHORT_SHA}",
+      ]
 
-#Edit Image SHA for GKE
-- name: 'gcr.io/cloud-builders/gcloud'
-  entrypoint: 'sed'
-  args:
-  - '-i'
-  - 's/SHORT_SHA/${SHORT_SHA}/g'
-  - 's/IMAGE_NAME/${_IMAGE_NAME}/g'
-  - 's/PROJECT_ID/${_GCP_PROJECT}/g'
-  - 's/ARTIFACT_REGISTRY_REPO/${_ARTIFACT_REGISTRY_REPO}/g'
-  - 's/GCP_REGION/${_GCP_REGION}/g'
-  - 'build/k8s/deployment.yaml'
+  # Edit Image SHA for GKE
+  - name: "gcr.io/cloud-builders/gcloud"
+    entrypoint: "sed"
+    args:
+      [
+        "-i",
+        "s/SHORT_SHA/${SHORT_SHA}/g",
+        "s/IMAGE_NAME/${_IMAGE_NAME}/g",
+        "s/PROJECT_ID/${_GCP_PROJECT}/g",
+        "s/ARTIFACT_REGISTRY_REPO/${_ARTIFACT_REGISTRY_REPO}/g",
+        "s/GCP_REGION/${_GCP_REGION}/g",
+        "build/k8s/deployment.yaml",
+      ]
 
-# Push to GKE
-- name: "gcr.io/cloud-builders/gke-deploy"
-  args: 
-    [
-      'apply',
-      '--filename', './build/k8s/deployment.yaml',
-      '--location', '${_GCP_REGION}',
-      '--cluster', '${_COMPUTE_CLUSTER}'
-    ]
+  # Push to GKE
+  - name: "gcr.io/cloud-builders/gke-deploy"
+    args:
+      [
+        "apply",
+        "--filename",
+        "./build/k8s/deployment.yaml",
+        "--location",
+        "${_GCP_REGION}",
+        "--cluster",
+        "${_COMPUTE_CLUSTER}",
+      ]
 
 images:
   - ${_GCP_REGION}-docker.pkg.dev/${_GCP_PROJECT}/${_ARTIFACT_REGISTRY_REPO}/${_IMAGE_NAME}:${SHORT_SHA}
