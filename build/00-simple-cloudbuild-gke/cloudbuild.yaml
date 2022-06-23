@@ -41,10 +41,10 @@ steps:
   - name: "gcr.io/cloud-builders/gke-deploy"
     args:
       [
-        "run",
+        "apply",
         "--filename=./build/k8s/deployment.yaml",
         "--location=${_GCP_REGION}",
-        "--cluster=${_COMPUTE_CLUSTER}",
+        "--cluster=${_K8S_CLUSTER}",
       ]
 
 images:
