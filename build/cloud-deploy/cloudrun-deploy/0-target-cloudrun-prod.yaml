@@ -1,0 +1,9 @@
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+  name: run-prod
+  requireApproval: true
+description: Cloud Run production environment
+gke:
+  # You need to substitute your project id here
+  cluster: projects/$PROJECT_ID/locations/us-central1/clusters/krmapihost-cc-deployrun
