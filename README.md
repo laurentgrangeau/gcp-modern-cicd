@@ -3,23 +3,25 @@
 ## 0. Activate APIs
 
 ```bash
-gcloud services enable artifactregistry.googleapis.com \
-binaryauthorization.googleapis.com \
-cloudbuild.googleapis.com \
-clouddeploy.googleapis.com \
-container.googleapis.com \
-containeranalysis.googleapis.com \
-containerfilesystem.googleapis.com \
-containerregistry.googleapis.com \
-ondemandscanning.googleapis.com \
-orgpolicy.googleapis.com \
-oslogin.googleapis.com \
-pubsub.googleapis.com \
-run.googleapis.com \
-sourcerepo.googleapis.com \
-storage-api.googleapis.com \
-storage-component.googleapis.com \
-storage.googleapis.com
+gcloud services enable \
+  artifactregistry.googleapis.com \
+  binaryauthorization.googleapis.com \
+  cloudbuild.googleapis.com \
+  clouddeploy.googleapis.com \
+  container.googleapis.com \
+  containeranalysis.googleapis.com \
+  containerfilesystem.googleapis.com \
+  containerregistry.googleapis.com \
+  krmapihosting.googleapis.com \
+  ondemandscanning.googleapis.com \
+  orgpolicy.googleapis.com \
+  oslogin.googleapis.com \
+  pubsub.googleapis.com \
+  run.googleapis.com \
+  sourcerepo.googleapis.com \
+  storage-api.googleapis.com \
+  storage-component.googleapis.com \
+  storage.googleapis.com
 ```
 
 ## 1. Create a Cloud Source Repository in your project
@@ -42,25 +44,33 @@ gcloud projects add-iam-policy-binding ${PROJECT_ID} \
         --member="serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com" \
         --role="roles/container.developer"
 ```
+
+### Grant Cloud Build access to Cloud Run
 ```bash
 gcloud projects add-iam-policy-binding ${PROJECT_ID} \
         --member="serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com" \
-        --role="roles/clouddeploy.releaser"
+        --role="roles/run.developer"
 ```
+
+### Grant Cloud Build permission to act as Cloud Run runtime service account
 ```bash
 gcloud projects add-iam-policy-binding ${PROJECT_ID} \
         --member="serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com" \
         --role="roles/iam.serviceAccountUser"
 ```
+
+### Grant Cloud Build permission to perform a vulnerability scan
 ```bash
 gcloud projects add-iam-policy-binding ${PROJECT_ID} \
         --member="serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com" \
         --role="roles/ondemandscanning.admin"
 ```
+
+### Grant Cloud Build permission to create Cloud Deploy releases
 ```bash
 gcloud projects add-iam-policy-binding ${PROJECT_ID} \
         --member="serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com" \
-        --role="roles/run.admin"
+        --role="roles/clouddeploy.releaser"
 ```
 
 ## 5. Update your cluster url in `0-pipeline.yaml` for GKE and CR
