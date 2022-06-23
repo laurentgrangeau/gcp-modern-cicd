@@ -73,6 +73,16 @@ gcloud projects add-iam-policy-binding ${PROJECT_ID} \
         --role="roles/clouddeploy.releaser"
 ```
 
+### Grant Config Controller permission to manage GCP
+```bash
+export SA_EMAIL="$(kubectl get ConfigConnectorContext -n config-control \
+    -o jsonpath='{.items[0].spec.googleServiceAccount}' 2> /dev/null)"
+gcloud projects add-iam-policy-binding "${PROJECT_ID}" \
+    --member "serviceAccount:${SA_EMAIL}" \
+    --role "roles/owner" \
+    --project "${PROJECT_ID}"
+```
+
 ## 5. Update your cluster url in `0-pipeline.yaml` for GKE and CR
 
 ## 6. Update GKE and CR yaml files to set your `$PROJECT_ID`
