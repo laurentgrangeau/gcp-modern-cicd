@@ -1,5 +1,7 @@
 defaultAdmissionRule:
   enforcementMode: ENFORCED_BLOCK_AND_AUDIT_LOG
-  evaluationMode: ALWAYS_ALLOW
+  evaluationMode: REQUIRE_ATTESTATION
+  requireAttestationsBy:
+    - projects/lgu-demos/attestors/built-by-cloud-build
 globalPolicyEvaluationMode: ENABLE
 name: projects/lgu-demos/policy
