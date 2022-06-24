@@ -1,0 +1,16 @@
+apiVersion: deploy.cloud.google.com/v1
+kind: DeliveryPipeline
+metadata:
+  name: run-pipeline
+description: Cloud Run Pipeline
+serialPipeline:
+  stages:
+    - targetId: run-dev
+      profiles:
+        - dev
+    - targetId: run-staging
+      profiles:
+        - staging
+    - targetId: run-prod
+      profiles:
+        - prod

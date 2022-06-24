@@ -1,0 +1,8 @@
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+  name: run-dev
+description: Cloud Run development environment
+gke:
+  # You need to substitute your project id here
+  cluster: projects/lgu-demos/locations/europe-west1/clusters/krmapihost-cc-deployrun
