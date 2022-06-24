@@ -8,6 +8,7 @@ gcloud services enable \
   binaryauthorization.googleapis.com \
   cloudbuild.googleapis.com \
   clouddeploy.googleapis.com \
+  cloudkms.googleapis.com \
   container.googleapis.com \
   containeranalysis.googleapis.com \
   containerfilesystem.googleapis.com \
@@ -95,6 +96,19 @@ git clone https://github.com/GoogleCloudPlatform/cloud-builders-community.git
 cd cloud-builders-community/binauthz-attestation
 gcloud builds submit . --config cloudbuild.yaml
 gcloud container binauthz policy import binauth-policy/policy.yaml
+### Create KMS key for binauthz-attestation
+gcloud kms keyrings create binauthz-attestors \
+  --location europe-west1
+gcloud kms keys create binauthz-decrypt-key \
+  --keyring binauthz-attestors \
+  --location europe-west1 \
+  --purpose "asymmetric-encryption" \
+  --default-algorithm "rsa-decrypt-oaep-2048-sha256"
+gcloud kms keys create binauthz-signing-key \
+  --keyring binauthz-attestors \
+  --location europe-west1 \
+  --purpose "asymmetric-signing" \
+  --default-algorithm "rsa-sign-pkcs1-2048-sha256"
 ### Grant Cloud Build permission to view the created attestor
 ```bash
 gcloud projects add-iam-policy-binding ${PROJECT_ID} \
