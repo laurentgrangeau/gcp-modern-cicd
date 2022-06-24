@@ -88,3 +88,30 @@ gcloud projects add-iam-policy-binding "${PROJECT_ID}" \
 ## 6. Update GKE and CR yaml files to set your `$PROJECT_ID`
 
 ## 7. For Cloud Run demo, please follow the pre-requisite steps of [this doc](https://docs.google.com/document/d/1DFunajJsevYhoVg6x3xC8YInzGLkRTLk_TxfpY_esQk/edit#) to get a config controller cluster
+
+## 8. Enable Binary Authorization on Cloud Run
+### One-time build for binauthz-attestation
+git clone https://github.com/GoogleCloudPlatform/cloud-builders-community.git
+cd cloud-builders-community/binauthz-attestation
+gcloud builds submit . --config cloudbuild.yaml
+gcloud container binauthz policy import binauth-policy/policy.yaml
+### Grant Cloud Build permission to view the created attestor
+```bash
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+  --member "serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com" \
+  --role "roles/binaryauthorization.attestorsViewer"
+```
+### Grant Cloud Build permission to verify the KMS cryptokeys
+```bash
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+  --member "serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com" \
+  --role "roles/cloudkms.signerVerifier"
+```
+### Grant Cloud Build permission to attach notes
+```bash
+gcloud projects add-iam-policy-binding ${PROJECT_ID} \
+  --member "serviceAccount:${PROJECT_NUMBER}@cloudbuild.gserviceaccount.com" \
+  --role "roles/containeranalysis.notes.attacher"
+```
+### Enable Binary Authorization for Cloud Run
+gcloud run services update SERVICE_NAME --binary-authorization=default
