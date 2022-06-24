@@ -18,8 +18,8 @@ steps:
         "${_GCP_REGION}-docker.pkg.dev/${_GCP_PROJECT}/${_ARTIFACT_REGISTRY_REPO}/${_IMAGE_NAME}:${SHORT_SHA}",
       ]
 
-  #Run a vulnerability scan at _SECURITY level
-  - id: scan
+  # Run a vulnerability scan at _SECURITY level
+  - id: Vulnerability scan
     name: "gcr.io/cloud-builders/gcloud"
     entrypoint: "bash"
     args:
@@ -30,8 +30,8 @@ steps:
         --remote --location europe \
         --format="value(response.scan)" > /workspace/scan_id.txt
 
-  #Analyze the result of the scan
-  - id: severity check
+  # Analyze the result of the scan
+  - id: Check vulnerabilities severity
     name: "gcr.io/cloud-builders/gcloud"
     entrypoint: "bash"
     args:
