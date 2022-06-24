@@ -1,7 +1,7 @@
 apiVersion: deploy.cloud.google.com/v1
 kind: Target
 metadata:
-  name: run-prod
+  name: run-prod-binauthz
   requireApproval: true
 description: Cloud Run production environment
 gke:

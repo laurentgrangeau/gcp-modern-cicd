@@ -5,12 +5,12 @@ metadata:
 description: Cloud Run Pipeline
 serialPipeline:
   stages:
-    - targetId: run-dev
+    - targetId: run-dev-binauthz
       profiles:
-        - dev
-    - targetId: run-staging
+        - dev-binauthz
+    - targetId: run-staging-binauthz
       profiles:
-        - staging
-    - targetId: run-prod
+        - staging-binauthz
+    - targetId: run-prod-binauthz
       profiles:
-        - prod
+        - prod-binauthz

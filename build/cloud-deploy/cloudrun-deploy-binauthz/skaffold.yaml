@@ -1,17 +1,17 @@
 apiVersion: skaffold/v2beta7
 kind: Config
 profiles:
-  - name: dev
+  - name: dev-binauthz
     deploy:
       kubectl:
         manifests:
           - 1-run-dev-*.yaml
-  - name: staging
+  - name: staging-binauthz
     deploy:
       kubectl:
         manifests:
           - 1-run-staging-*.yaml
-  - name: prod
+  - name: prod-binauthz
     deploy:
       kubectl:
         manifests:

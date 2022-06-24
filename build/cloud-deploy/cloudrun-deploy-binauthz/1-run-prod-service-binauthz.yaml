@@ -2,8 +2,8 @@ apiVersion: run.cnrm.cloud.google.com/v1beta1
 kind: RunService
 metadata:
   labels:
-    cloud-deploy-target: run-prod
-  name: demo-app-prod
+    cloud-deploy-target: run-prod-binauthz
+  name: demo-app-prod-binauthz
   namespace: config-control
 spec:
   binaryAuthorization:
@@ -17,7 +17,7 @@ spec:
       - env:
           - name: environment
             value: prod
-        image: run-container
+        image: run-container-binauthz
     scaling:
       maxInstanceCount: 10
   traffic:

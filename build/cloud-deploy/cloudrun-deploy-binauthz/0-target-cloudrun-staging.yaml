@@ -1,7 +1,7 @@
 apiVersion: deploy.cloud.google.com/v1
 kind: Target
 metadata:
-  name: run-staging
+  name: run-staging-binauthz
   requireApproval: false
 description: Cloud Run staging environment
 gke:

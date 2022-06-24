@@ -1,7 +1,7 @@
 apiVersion: deploy.cloud.google.com/v1
 kind: Target
 metadata:
-  name: run-dev
+  name: run-dev-binauthz
 description: Cloud Run development environment
 gke:
   # You need to substitute your project id here

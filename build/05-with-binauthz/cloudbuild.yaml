@@ -54,13 +54,13 @@ steps:
 
   # Push to Cloud Deploy _DEPLOY_PIPELINE if successful
   - name: "gcr.io/cloud-builders/gcloud"
-    dir: "build/cloud-deploy/gke-deploy"
+    dir: "build/cloud-deploy/cloudrun-deploy-binauthz"
     args:
       [
         "deploy",
         "releases",
         "create",
-        "gke-release-${SHORT_SHA}",
+        "cloud-run-binauthz-release-${SHORT_SHA}",
         "--region",
         "${_GCP_REGION}",
         "--delivery-pipeline",
@@ -68,7 +68,7 @@ steps:
         "--annotations",
         "commitID=${REVISION_ID}",
         "--images",
-        "gke-container=${_GCP_REGION}-docker.pkg.dev/${_GCP_PROJECT}/${_ARTIFACT_REGISTRY_REPO}/${_IMAGE_NAME}:${SHORT_SHA}",
+        "run-container-binauthz=${_GCP_REGION}-docker.pkg.dev/${_GCP_PROJECT}/${_ARTIFACT_REGISTRY_REPO}/${_IMAGE_NAME}:${SHORT_SHA}",
       ]
 
 images:
