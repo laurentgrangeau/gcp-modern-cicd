@@ -1,0 +1,45 @@
+apiVersion: deploy.cloud.google.com/v1
+kind: DeliveryPipeline
+metadata:
+  name: gke-pipeline-binauthz
+description: GKE Pipeline with Binary Authorization
+serialPipeline:
+  stages:
+    - targetId: gke-dev-binauthz
+      profiles:
+        - dev
+    - targetId: gke-staging-binauthz
+      profiles:
+        - staging
+    - targetId: gke-prod-binauthz
+      profiles:
+        - prod
+---
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+  name: gke-dev-binauthz
+description: GKE development environment with Binary Authorization
+gke:
+  # You need to substitute your project id here
+  cluster: projects/lgu-demos/locations/europe-west1-c/clusters/modern-cicd
+---
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+  name: gke-staging-binauthz
+  requireApproval: false
+description: GKE staging environment with Binary Authorization
+gke:
+  # You need to substitute your project id here
+  cluster: projects/lgu-demos/locations/europe-west1-c/clusters/modern-cicd
+---
+apiVersion: deploy.cloud.google.com/v1
+kind: Target
+metadata:
+  name: gke-prod-binauthz
+  requireApproval: true
+description: GKE production environment with Binary Authorization
+gke:
+  # You need to substitute your project id here
+  cluster: projects/lgu-demos/locations/europe-west1-c/clusters/modern-cicd
