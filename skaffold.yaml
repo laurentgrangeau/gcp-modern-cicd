@@ -1,0 +1,8 @@
+apiVersion: skaffold/v2beta29
+kind: Config
+build:
+  artifacts:
+    - image: "demo-app"
+      buildpacks:
+        builder: "gcr.io/buildpacks/builder:v1"
+      context: ./app
